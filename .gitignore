@@ -1,0 +1,7 @@
+# Ignorar archivos de configuración locales
+.env
+
+# Ignorar directorios y archivos generados automáticamente
+node_modules/
+build/
+dist/
