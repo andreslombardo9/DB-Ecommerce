@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config.js';
+
 export const authRequired = (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
@@ -21,22 +22,21 @@ export const authRequired = (req, res, next) => {
 
 
 
-
 export const checkUserRole = (requiredRole) => {
   return (req, res, next) => {
     // Obtener el token del encabezado de la solicitud
     let token = req.header('Authorization');
     token = token.split(' ');
-    token = token[token.length - 1]
-
+    token = token[token.length - 1];
+    console.log("AVER CHECK USER ROLE",token);
     if (!token) {
       return res.status(401).json({ message: 'Acceso no autorizado' });
     }
 
     try {
       // Verificar y descodificar el token
-      const decoded = jwt.verify(token, TOKEN_SECRET); // Reemplaza 'tu_secreto' con tu clave secreta real
-
+      const decoded = jwt.verify(token, TOKEN_SECRET);
+      console.log("AVER: ",decoded);
       // Comprobar si el rol del usuario coincide con el rol requerido
       if (decoded.rol !== requiredRole) {
         return res.status(403).json({ message: 'Permiso denegado' });

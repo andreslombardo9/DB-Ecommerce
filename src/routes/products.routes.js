@@ -8,7 +8,7 @@ const router = Router();
 router.get('/products', authRequired, getProducts);
 
 
-router.post('/products', authRequired, checkUserRole('administrador'), validateSchema(createProductSchema), createProduct);
+router.post('/products', authRequired, checkUserRole("administrador"), validateSchema(createProductSchema), createProduct);
 // Reemplazar checkUserRole('administrador') por algo similar a checkUserRole(STRING_ROL_ADMIN)
 router.delete('/products/:id',authRequired, deleteProduct);
 

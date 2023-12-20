@@ -6,9 +6,18 @@ import RoleRoutes from './routes/rol.routes.js';
 import orderRoutes from './routes/order.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
+import categoriesRoutes from './routes/categories.routes.js'
 import { sequelize } from './db.js';
-
+import cors from "cors";
 const app = express();
+
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 // Middlewares
 app.use(morgan('dev'));
@@ -30,6 +39,7 @@ sequelize.sync()
     console.error('Error syncing database:', error);
   });
 
+app.use('/api', categoriesRoutes)
 app.use('/api', productRoutes);
 app.use('/api', orderDetailsRoutes);
 app.use('/api', RoleRoutes);

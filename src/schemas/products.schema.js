@@ -8,7 +8,7 @@ export const createProductSchema = z.object({
         required_error: 'Description must be a string'
     }),
     price: z.number({
-        required_error: 'Precio must be a string'
+        required_error: 'Precio must number a string'
     }),
    urlImage: z.string({
         required_error: 'urlImagen must be a string'
